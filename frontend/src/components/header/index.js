@@ -1,10 +1,12 @@
-import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import _ from 'lodash'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { Transition } from '@tailwindui/react'
 import { useRecoilValue } from 'recoil'
 import { getFirstName, getLastName } from '../../store/selector'
+
+const regexPathDashboard = /^\/dashboard/i
+const regexPathAnswer = /^\/answer/i
 
 function Header() {
     const [isOpenProfile, setIsOpenProfile] = useState(false)
@@ -12,6 +14,12 @@ function Header() {
 
     const firstName = useRecoilValue(getFirstName)
     const lastName = useRecoilValue(getLastName)
+
+    const history = useHistory()
+    const path = _.get(history, ['location', 'pathname'], '')
+
+    const isDashboard = regexPathDashboard.test(path.toLocaleLowerCase())
+    const isAnswer = regexPathAnswer.test(path.toLocaleLowerCase())
 
     return (
         <nav className="bg-orange-600">
@@ -38,10 +46,18 @@ function Header() {
                         </div>
                         <div className="hidden sm:block sm:ml-6">
                             <div className="flex">
-                                <a href="#" className="px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-orange-800 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Dashboard</a>
-                                <a href="#" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Team</a>
-                                <a href="#" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Projects</a>
-                                <a href="#" className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Calendar</a>
+                                {
+                                    isDashboard ?
+                                        <Link to={"/dashboard"} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-orange-800 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Dashboard</Link>
+                                        :
+                                        <Link to={"/dashboard"} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Dashboard</Link>
+                                }
+                                {
+                                    isAnswer ?
+                                        <Link to={"/answer"} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-white bg-orange-800 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Answer</Link>
+                                        :
+                                        <Link to={"/answer"} className="ml-4 px-3 py-2 rounded-md text-sm font-medium leading-5 text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Answer</Link>
+                                }
                             </div>
                         </div>
                     </div>
@@ -88,10 +104,8 @@ function Header() {
             >
                 <div className="sm:hidden">
                     <div className="px-2 pt-2 pb-3">
-                        <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-white bg-orange-800 focus:outline-none focus:text-white focus:bg-orange-500 transition duration-150 ease-in-out">Dashboard</a>
-                        <a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Team</a>
-                        <a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Projects</a>
-                        <a href="#" className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Calendar</a>
+                        <Link to={"/dashboard"} className="block px-3 py-2 rounded-md text-base font-medium text-white bg-orange-800 focus:outline-none focus:text-white focus:bg-orange-500 transition duration-150 ease-in-out">Dashboard</Link>
+                        <Link to={"/answer"} className="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-orange-700 focus:outline-none focus:text-white focus:bg-orange-700 transition duration-150 ease-in-out">Answer</Link>
                     </div>
                 </div>
             </Transition>

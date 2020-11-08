@@ -1,9 +1,9 @@
-import _ from 'lodash'
 import { useState } from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
 import { listOptionState } from '../../../store/atom'
 import { getJokes, getPagination, getLimits } from '../../../store/selector'
 import { Transition } from '@tailwindui/react'
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
     const { jokes, pages, limit, numberOfPage, totalJokes } = useRecoilValue(getJokes)
@@ -56,11 +56,11 @@ function Dashboard() {
                             </div>
                 </div>
                 <div className="grid grid-cols-3 w-full sm:hidden">
-                    <a href="#"
+                    <Link to={"#"}
                         className="text-center px-2 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
                         onClick={() => onChangePagination('<')}>
                         Previous
-                        </a>
+                        </Link>
                     <div className="text-center px-2">
                         <div>
                             <span className="rounded-md shadow-sm">
@@ -91,12 +91,12 @@ function Dashboard() {
                                         {
                                             limits.map(number => {
                                                 return (
-                                                    <a href="#" key={number} className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                                                    <Link to={"#"} key={number} className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                                                         role="menuitem"
                                                         onClick={() => onChangeLimit(number)}
                                                     >
                                                         {number}
-                                                    </a>
+                                                    </Link>
                                                 )
                                             })
                                         }
@@ -108,11 +108,11 @@ function Dashboard() {
                             </div>
                         </Transition>
                     </div>
-                    <a href="#"
+                    <Link to={"#"}
                         className="text-center px-2 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
                         onClick={() => onChangePagination('>')}>
                         Next
-                    </a>
+                    </Link>
                 </div>
                 <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                     <div>
@@ -155,12 +155,12 @@ function Dashboard() {
                                                 {
                                                     limits.map(number => {
                                                         return (
-                                                            <a href="#" key={number} className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                                                            <Link to={"#"} key={number} className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                                                                 role="menuitem"
                                                                 onClick={() => onChangeLimit(number)}
                                                             >
                                                                 {number}
-                                                            </a>
+                                                            </Link>
                                                         )
                                                     })
                                                 }

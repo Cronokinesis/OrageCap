@@ -1,4 +1,4 @@
-import _, { last } from 'lodash'
+import _ from 'lodash'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { characterState, jokesState } from '../../../store/atom'
@@ -21,7 +21,7 @@ function SignIn(props) {
         let params = `?${_.isEmpty(firstName) ? '' : `firstName=${firstName}`}&${_.isEmpty(lastName) ? '' : `lastName=${lastName}`}`
 
         const response = await axios.get(`http://api.icndb.com/jokes/${params}`)
-        if (_.get(response, 'status', 0) == 200) {
+        if (_.get(response, 'status', 0) === 200) {
             const value = _.get(response, ['data', 'value'], [])
             _.sortBy(value, ['id'])
             setJokes(value)

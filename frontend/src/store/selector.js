@@ -1,6 +1,7 @@
-import _, { max } from 'lodash'
+import _ from 'lodash'
 import { selector } from 'recoil'
-import { characterState, jokesState, listOptionState } from './atom'
+import { characterState, jokesState, listOptionState, selectAnswer } from './atom'
+import { answer } from './const'
 
 export const getLastName = selector({
     key: 'getFirstName',
@@ -59,12 +60,12 @@ export const getPagination = selector({
         let pagination = [{
             no: 0,
             active: false,
-            enable: difStart != 0,
+            enable: difStart !== 0,
             symbol: '<'
         }, {
             no: maxPages + 1,
             active: false,
-            enable: difEnd != 0,
+            enable: difEnd !== 0,
             symbol: '>'
         }]
 
@@ -72,7 +73,7 @@ export const getPagination = selector({
             for (let i = 1; i <= (maxPages > 5 ? 5 : maxPages); i++) {
                 pagination.push({
                     no: i,
-                    active: i == numberOfPage ? true : false,
+                    active: i === numberOfPage ? true : false,
                     enable: true,
                     symbol: i
                 })
@@ -81,7 +82,7 @@ export const getPagination = selector({
             for (let i = maxPages; i > maxPages - 5; i--) {
                 pagination.push({
                     no: i,
-                    active: i == numberOfPage ? true : false,
+                    active: i === numberOfPage ? true : false,
                     enable: true,
                     symbol: i
                 })
@@ -90,7 +91,7 @@ export const getPagination = selector({
             for (let i = numberOfPage - 2; i <= numberOfPage + 2; i++) {
                 pagination.push({
                     no: i,
-                    active: i == numberOfPage ? true : false,
+                    active: i === numberOfPage ? true : false,
                     enable: true,
                     symbol: i
                 })
@@ -107,5 +108,18 @@ export const getLimits = selector({
     key: 'getLimits',
     get: ({ get }) => {
         return [5, 10, 20, 50, 100]
+    }
+})
+
+export const getAnswer = selector({
+    key: 'getAnswer',
+    get: ({ get }) => {
+        const select = get(selectAnswer)
+        const split = answer[select - 1].split('-')
+        
+        return {
+            list: [1, 2, 3, 4, 5, 6],
+            answer: _.compact(split)
+        }
     }
 })

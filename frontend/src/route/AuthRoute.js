@@ -12,7 +12,7 @@ function AuthRoute({ children, ...rest }) {
         <Route
             {...rest}
             render={({ location }) =>
-                _.size(jokes) != 0 ? (
+                _.size(jokes) !== 0 ? (
                     children
                 ) : (
                         <Redirect

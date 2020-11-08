@@ -20,3 +20,8 @@ export const listOptionState = atom({
         numberOfPage: 1
     }
 })
+
+export const selectAnswer = atom({
+    key: 'selectAnswer',
+    default: 1
+})

@@ -298,6 +298,7 @@ module.exports = {
       full: '100%',
       'full-80': '80%',
       screen: '100vh',
+      'screen-70': '70vh',
       'screen-80': '80vh',
       'screen-90': '90vh',
     }),

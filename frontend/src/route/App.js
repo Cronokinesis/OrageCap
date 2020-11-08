@@ -8,6 +8,7 @@ import AuthRoute from './AuthRoute'
 import Standard from '../components/template/standard'
 import SignIn from '../components/main/sign-in'
 import Dashboard from '../components/main/dashboard'
+import Answer from '../components/main/myAnswer'
 
 function App() {
     return (
@@ -22,6 +23,11 @@ function App() {
                             <Route exact path="/dashboard">
                                 <Dashboard />
                             </Route>
+                        </Standard>
+                    </AuthRoute>
+                    <AuthRoute path="/answer">
+                        <Standard>
+                            <Answer />
                         </Standard>
                     </AuthRoute>
                     <Route path="/">
