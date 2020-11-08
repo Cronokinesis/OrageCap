@@ -5,7 +5,7 @@ export async function dislike(req, res) {
     try {
         const id = _.get(req, ['params', 'id'], -1)
         if (isNaN(id) || id <= 0) {
-            return res.status(200).json({
+            return res.status(404).json({
                 type: 'failure',
                 value: 'not found id'
             })
@@ -20,7 +20,7 @@ export async function dislike(req, res) {
         })
     } catch (e) {
         console.log(e)
-        return res.status(200).json({
+        return res.status(500).json({
             type: 'failure',
         })
     }

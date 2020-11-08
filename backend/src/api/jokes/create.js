@@ -9,7 +9,7 @@ export async function createJoke(req, res) {
         } = _.get(req, 'body', {})
 
         if (_.isEmpty(joke)) {
-            return res.status(200).json({
+            return res.status(404).json({
                 type: 'failure',
                 value: 'joke is empty'
             })
@@ -24,12 +24,12 @@ export async function createJoke(req, res) {
         await newJoke.save()
 
 
-        return res.status(200).json({
+        return res.status(201).json({
             type: 'success'
         })
     } catch (e) {
         console.log(e)
-        return res.status(200).json({
+        return res.status(500).json({
             type: 'failure',
             value: 'server internal error'
         })

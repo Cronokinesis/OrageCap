@@ -20,7 +20,7 @@ export async function getJokes(req, res) {
         })
     } catch (e) {
         console.log(e)
-        return res.status(200).json({
+        return res.status(500).json({
             type: 'failure',
             value: []
         })

@@ -24,7 +24,7 @@ export async function createAccount(req, res) {
             user.lastname = lastname
             await user.save()
 
-            return res.status(200).json({
+            return res.status(201).json({
                 type: 'success'
             })
         }
@@ -34,7 +34,7 @@ export async function createAccount(req, res) {
             errMessage: "username is already exists"
         })
     } catch (e) {
-        return res.status(200).json({
+        return res.status(500).json({
             type: 'failure',
         })
     }

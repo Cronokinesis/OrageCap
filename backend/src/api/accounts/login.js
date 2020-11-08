@@ -25,6 +25,6 @@ export async function login(req, res) {
         return res.status(401).send('unauthentication')
     } catch (e) {
         console.log(e)
-        return res.status(401).send('unauthentication')
+        return res.status(500).send('unauthentication')
     }
 }
