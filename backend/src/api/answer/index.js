@@ -1,0 +1,1 @@
+export { myAnswer } from './myAnswer'
